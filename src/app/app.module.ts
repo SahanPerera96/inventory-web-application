@@ -12,6 +12,9 @@ import { DetailslistComponent } from './stock/detailslist/detailslist.component'
 import { StockService } from './service/stock.service';
 
 import {HttpClientModule} from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {HttpClientModule} from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot() 
   ],
   providers: [StockService],
   bootstrap: [AppComponent]

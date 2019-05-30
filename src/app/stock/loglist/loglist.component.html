@@ -1,3 +1,21 @@
-<p>
-  loglist works!
-</p>
+<table class="table table-hover table-bordered">
+   
+    <thead class="thead-dark thead-center">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Reason</th>
+          <th scope="col">User</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+  <tr *ngFor = "let stock of service.list">
+      
+    <td (click) = "populateForm(stock)">{{stock.date}}</td>
+    <td (click) = "populateForm(stock)">{{stock.reason}}</td>
+    <td (click) = "populateForm(stock)">{{stock.userId}}</td>
+    <td><button class="btn btn-sm btn-outline-success">Details</button></td>
+    <td><button class="btn btn-sm btn-outline-danger" (click) = "onDelete(stock.id)"> X </button></td>
+  </tr>
+</table>

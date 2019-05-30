@@ -14,3 +14,10 @@ div.validation-error{
 table.table-hover tbody tr:hover{
     cursor: pointer;
 }
+
+.table td {
+    text-align: center;   
+ }
+ .table thead  {
+    text-align: center;   
+ }

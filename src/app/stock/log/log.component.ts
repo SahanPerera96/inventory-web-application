@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StockService } from 'src/app/service/stock.service';
 import { NgForm } from '@angular/forms';
 import { from } from 'rxjs';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { reject } from 'q';
 
 @Component({
   selector: 'app-log',
@@ -9,8 +11,9 @@ import { from } from 'rxjs';
   styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
+//  logmodel = {userid: '1', reason: '', draftDetails: []};
 
-  constructor(private service: StockService) { }
+  constructor(private service: StockService, private toastr:ToastrService) { }
 
   ngOnInit() {
     this.resetForm();
@@ -32,16 +35,72 @@ export class LogComponent implements OnInit {
   } 
 
   onSubmit(form: NgForm) {
+
+    if(form.value.id == null){
+      this.service.formData.userId = 1;
+      this.service.formData.draftDetails = [];
+      // this.service.formData.reason = '';
+      // let payload = {
+      //   "userId": this.logmodel.userid,
+      //   "reason": this.logmodel.reason,
+      //   "draftDetails": this.logmodel.draftDetails
+      // }
+  
+      let payload = {
+        "userId": this.service.formData.userId,
+        "reason": this.service.formData.reason,
+        "draftDetails": this.service.formData.draftDetails
+      }
+      console.log("this is the payload");
+      console.log(payload);
+      this.insertRecord(payload,form);
+    }else{
+ 
+      let payload = {
+        "userId": this.service.formData.userId,
+        "reason": this.service.formData.reason,
+        "draftDetails": this.service.formData.draftDetails,
+        "id":this.service.formData.id
+      }
+      console.log("this is the payload");
+      console.log(payload);
+      this.updateRecord(payload,form);
+    }
     
-    this.insertRecord(form);
   }
 
-  insertRecord(form: NgForm){
-
-    this.service.postDraftStockLog(form.value).subscribe(res =>{
-      // this.resetForm(form)
-      console.log(res);
-      
-    })
+  insertRecord(payload,form: NgForm){
+    let response;
+    this.service.postDraftStockLog(payload).subscribe(res =>{
+      this.resetForm(form);
+      response = res;
+      // console.log(response);
+      this.toastr.success(response.message,response.response);
+      this.service.refreshList();
+    },
+    err => {
+      reject(err)
+      this.toastr.error(err.error.message,err.error.response);
+      console.log(err);
+      // console.log(err.error.response);
+    });
   }
+
+  updateRecord(payload,form: NgForm){
+    let response;
+    this.service.putDraftStockLog(payload).subscribe(res =>{
+      this.resetForm(form);
+      response = res;
+      // console.log(response);
+      this.toastr.success(response.message,response.response);
+      this.service.refreshList();
+    },
+    err => {
+      reject(err)
+      this.toastr.error("Failed","Failed to update database.");
+      console.log(err);
+      // console.log(err.error.response);
+    });
+  }
+  
 }
