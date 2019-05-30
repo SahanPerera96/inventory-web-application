@@ -14,7 +14,7 @@ export class LoglistComponent implements OnInit {
   constructor(private service: StockService, private toastr:ToastrService) { }
 
   ngOnInit() {
-    this.service.refreshList();
+    this.service.refreshLogList();
   }
 
   populateForm(stock : Draftlog){
@@ -30,7 +30,7 @@ export class LoglistComponent implements OnInit {
       response = res;
       console.log(response);
       this.toastr.success(response.message,response.response);
-      this.service.refreshList();
+      this.service.refreshLogList();
     },
     err => {
       reject(err)
@@ -39,6 +39,9 @@ export class LoglistComponent implements OnInit {
       // console.log(err.error.response);
     });
     }
+    
+  }
+  viewDetails(){
     
   }
 

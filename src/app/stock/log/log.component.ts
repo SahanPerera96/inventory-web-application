@@ -20,9 +20,9 @@ export class LogComponent implements OnInit {
 
   }
 
-  resetForm(from?: NgForm) {
-    if (from != null)
-      from.resetForm();
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.resetForm();
     this.service.formData = {
 
       id: null,
@@ -76,7 +76,7 @@ export class LogComponent implements OnInit {
       response = res;
       // console.log(response);
       this.toastr.success(response.message,response.response);
-      this.service.refreshList();
+      this.service.refreshLogList();
     },
     err => {
       reject(err)
@@ -93,14 +93,16 @@ export class LogComponent implements OnInit {
       response = res;
       // console.log(response);
       this.toastr.success(response.message,response.response);
-      this.service.refreshList();
+      this.service.refreshLogList();
     },
     err => {
       reject(err)
-      this.toastr.error("Failed","Failed to update database.");
+      this.toastr.error("Failed to update database.","Failed");
       console.log(err);
       // console.log(err.error.response);
     });
   }
+
+  
   
 }

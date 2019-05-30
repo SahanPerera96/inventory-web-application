@@ -15,7 +15,7 @@
     <td (click) = "populateForm(stock)">{{stock.date}}</td>
     <td (click) = "populateForm(stock)">{{stock.reason}}</td>
     <td (click) = "populateForm(stock)">{{stock.userId}}</td>
-    <td><button class="btn btn-sm btn-outline-success">Details</button></td>
+    <td><button class="btn btn-sm btn-outline-success"(click) = "viewDetails()">Details</button></td>
     <td><button class="btn btn-sm btn-outline-danger" (click) = "onDelete(stock.id)"> X </button></td>
   </tr>
 </table>

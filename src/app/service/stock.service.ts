@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Draftlog } from '../model/openstock/draftlog';
 import {HttpClient} from '@angular/common/http'
 import { reject } from 'q';
+import { Draftdetails } from '../model/openstock/draftdetails';
 
 
 
@@ -11,7 +12,9 @@ import { reject } from 'q';
 export class StockService {
 
   formData : Draftlog;
+  draftFormData : Draftdetails;
   list : Draftlog[];
+  detailList : Draftdetails[];
 
   constructor(private http:HttpClient) { }
   readonly Default_URL ='http://localhost:8080';
@@ -19,7 +22,7 @@ export class StockService {
     return this.http.post(this.Default_URL +'/stock/openstock/draft/entry',formData)
   }
 
-  refreshList(){
+  refreshLogList(){
     return this.http.get(this.Default_URL+'/stock/openstock/draft').toPromise().then(
       res => {
        this.list = res as Draftlog[];
@@ -37,14 +40,29 @@ export class StockService {
   deleteDraftStockLog(id : number){
     return this.http.delete(this.Default_URL +'/stock/openstock/draft/entry/'+ id )
   }
-  getDraftLog(): Promise<any> {
-    return new Promise((resolve , reject) => {
-        this.http.get(this.Default_URL + '/stock/openstock/draft').subscribe(res => {
-                resolve(res);
-            },
-            err => {
-                reject(err);
-            });
-    });
-}
+  // draft log details crud operators
+  postDraftStockDetails(id : number,draftFormData : Draftdetails ){
+    return this.http.post(this.Default_URL +'/stock/openstock/draft/details/'+id ,draftFormData)
+  }
+
+  putDraftStockDetails(draftFormData : Draftdetails){
+    return this.http.put(this.Default_URL +'/stock/openstock/draft/details/'+ draftFormData.id ,draftFormData)
+  }
+
+  deleteDraftStockDetails(id : number){
+    return this.http.delete(this.Default_URL +'/stock/openstock/draft/details/'+ id )
+  }
+
+  refreshDetailsList(id : number){
+    return this.http.get(this.Default_URL+'/stock/openstock/draft/detailsAll/'+id).toPromise().then(
+      res => {
+        console.log(res);
+        
+       this.detailList = res as Draftdetails[];
+    },
+    err => {
+        reject(err);
+    }
+    )
+  }
 }

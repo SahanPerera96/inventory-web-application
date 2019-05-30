@@ -1,3 +1,41 @@
-<p>
-  details works!
-</p>
+<button type="submit"  class="btn btn-sm btn-block btn-info">Back</button>
+<br>
+<h3>Add Stock Log Details</h3>
+<br>
+<label>Date :</label><br>
+<label>Reason : </label><br>
+<label>User : </label>
+<hr>
+<form  #form="ngForm" autocomplete="off"  (submit)="onSubmit(form)">
+
+  <div class="form-group">
+    <label>Item</label>
+    <input name="itemId" #itemId= "ngModel" [(ngModel)]="service.draftFormData.itemId" class="form-control" required>
+    <div class="validation-error" *ngIf="itemId.invalid && itemId.touched" >This field is required</div>
+  </div>
+  <div class="form-group">
+    <label>UOM</label>
+    <input name="uomId" #uomId= "ngModel" [(ngModel)]="service.draftFormData.uomId" class="form-control" required>
+    <div class="validation-error" *ngIf="uomId.invalid && uomId.touched" >This field is required</div>
+  </div>
+  <div class="form-group">
+    <label>Brand</label>
+    <input name="brandId"  #brandId= "ngModel" [(ngModel)]="service.draftFormData.brandId" class="form-control" required>
+    <div class="validation-error" *ngIf="brandId.invalid && brandId.touched" >This field is required</div>
+  </div>
+  <div class="form-group">
+    <label>Quantity</label>
+    <input name="quantity" #quantity= "ngModel" [(ngModel)]="service.draftFormData.quantity" class="form-control" required>
+    <div class="validation-error" *ngIf="quantity.invalid && quantity.touched">This field is required</div>
+  </div>
+  <div class="form-group" hidden >
+    <label>Id</label>
+    <input name="id"  #id= "ngModel" [(ngModel)]="service.draftFormData.id" class="form-control">
+    <!-- <div class="validation-error" *ngIf="userid.invalid && userid.touched">This field is required</div> -->
+  </div>
+  
+  <div class="form-group">
+    <button type="submit"  [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+    <button type="reset"  class="btn btn-lg btn-block btn-info">Clear</button>
+  </div>
+</form>
