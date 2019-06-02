@@ -1,0 +1,49 @@
+<div>
+  <div class="col-sm-12 ">
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd; align-items: center;">
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <button (click)="goBack()"> Back</button>
+          <li class="nav-item">
+            <a class="nav-link mb-0 h6" (click)="stockMovementClick()">Stock Moment Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mb-0 h6" (click)="stockAsAtClick()">Stock As At Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mb-0 h6" (click)="onDemandClick()">On Demand Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mb-0 h6" (click)="criticalStockClick()">Critical Stock Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mb-0 h6" (click)="consumerInvoiceClick()">Consumer Invoice Report</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="col-sm-12" [hidden]="hideStockMovementReport">
+    <app-stockmovement></app-stockmovement>
+  </div>
+
+  <div class="col-sm-12" [hidden]="hideStockAsAtReport">
+    <app-stockasat></app-stockasat>
+  </div>
+
+  <div class="col-sm-12" [hidden]="hideOnDemandReport">
+    <app-ondemand></app-ondemand>
+  </div>
+
+  <div class="col-sm-12" [hidden]="hideCriticalStockReport">
+    <app-criticalstock></app-criticalstock>
+  </div>
+
+  <div class="col-sm-12" [hidden]="hideConsumerInvoiceReport">
+    <app-consumerinvoice></app-consumerinvoice>
+  </div>
+
+</div>

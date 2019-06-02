@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { from } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { reject } from 'q';
+import { Draftlog } from 'src/app/model/openstock/draftlog';
+
 
 @Component({
   selector: 'app-log',
@@ -12,7 +14,7 @@ import { reject } from 'q';
 })
 export class LogComponent implements OnInit {
 //  logmodel = {userid: '1', reason: '', draftDetails: []};
-
+// hidelog = false;
   constructor(private service: StockService, private toastr:ToastrService) { }
 
   ngOnInit() {
@@ -20,7 +22,7 @@ export class LogComponent implements OnInit {
 
   }
 
-  resetForm(form?: NgForm) {
+  resetForm(form?: NgForm) {  
     if (form != null)
       form.resetForm();
     this.service.formData = {
@@ -34,7 +36,7 @@ export class LogComponent implements OnInit {
     }
   } 
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm) { 
 
     if(form.value.id == null){
       this.service.formData.userId = 1;
@@ -69,7 +71,7 @@ export class LogComponent implements OnInit {
     
   }
 
-  insertRecord(payload,form: NgForm){
+  insertRecord(payload,form: NgForm){  // insert new log entry
     let response;
     this.service.postDraftStockLog(payload).subscribe(res =>{
       this.resetForm(form);
@@ -86,7 +88,7 @@ export class LogComponent implements OnInit {
     });
   }
 
-  updateRecord(payload,form: NgForm){
+  updateRecord(payload,form: NgForm){  // update new log entry
     let response;
     this.service.putDraftStockLog(payload).subscribe(res =>{
       this.resetForm(form);
@@ -102,6 +104,8 @@ export class LogComponent implements OnInit {
       // console.log(err.error.response);
     });
   }
+
+ 
 
   
   

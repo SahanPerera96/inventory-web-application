@@ -12,6 +12,7 @@ import { Draftdetails } from 'src/app/model/openstock/draftdetails';
 })
 export class DetailslistComponent implements OnInit {
   logDetailsModel = {userid: '1', reason: '', id:1};
+  
   constructor(private service: StockService, private toastr:ToastrService) { }
 
   ngOnInit() {

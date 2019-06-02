@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Draftlog } from '../model/openstock/draftlog';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { reject } from 'q';
 import { Draftdetails } from '../model/openstock/draftdetails';
 
@@ -16,6 +16,14 @@ export class StockService {
   list : Draftlog[];
   detailList : Draftdetails[];
 
+approvaFormData : Draftlog;
+approvaDraftFormData : Draftdetails;
+  approvalList : Draftlog[];
+  approvalDetailList : Draftdetails[];
+
+  masterList : Draftlog[];
+  masterListDetails : Draftdetails[];
+
   constructor(private http:HttpClient) { }
   readonly Default_URL ='http://localhost:8080';
   postDraftStockLog(formData : Draftlog){
@@ -23,14 +31,33 @@ export class StockService {
   }
 
   refreshLogList(){
-    return this.http.get(this.Default_URL+'/stock/openstock/draft').toPromise().then(
+   /* return this.http.get(this.Default_URL+'/stock/openstock/draft',{
+      headers: new HttpHeaders().set('Authorization', 'bearer c8560acc-77cc-4b14-825f-6cc36789d730')
+  }).toPromise().then(
       res => {
-       this.list = res as Draftlog[];
+       this.list = res as Draftlog[];s
     },
     err => {
         reject(err);
     }
-    )
+    )*/
+
+    return new Promise((resolve , reject) => {
+      this.http.get(this.Default_URL+'/stock/openstock/draft',
+      // {
+        //  headers: new HttpHeaders().set('Authorization', 'bearer 4dca4c42-fc2d-4c11-9bbc-411f20ebeb22')
+     // }
+      ).subscribe(res => {
+              resolve(res);
+              this.list = res as Draftlog[];
+          },
+          err => {
+              reject(err);
+          });
+      });
+
+
+
   }
 
   putDraftStockLog(formData : Draftlog){
@@ -64,5 +91,37 @@ export class StockService {
         reject(err);
     }
     )
+  }
+  // open stock approval
+  getAllDraftlogs(){
+    return this.http.get(this.Default_URL +'/stock/openstock/draft');
+    // return new Promise((resolve , reject) => {
+    //   this.http.get(this.Default_URL+'/stock/openstock/draft',
+
+    //   ).subscribe(res => {
+    //           resolve(res);
+    //           console.log("getAllDraftlogs");
+    //           this.approvalList = null;
+    //           this.approvalList = res as Draftlog[];
+    //       },
+    //       err => {
+    //           reject(err);
+    //       });
+    //   });
+
+  }
+  getDraftlogEntry(id : number){
+    return this.http.get(this.Default_URL +'/stock/openstock/draft/entry/'+ id );
+  }
+
+  getDraftlogDetails(id : number){
+    return this.http.get(this.Default_URL +'/stock/openstock/draft/detailsAll/'+ id );
+  }
+
+  setDraftApproval(id : number){
+    return this.http.post(this.Default_URL +'/stock/openstock/master', id);
+  }
+  getMasterStock(){
+    return this.http.get(this.Default_URL +'/stock/openstock/master');
   }
 }

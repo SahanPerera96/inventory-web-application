@@ -3,6 +3,11 @@ import { StockService } from 'src/app/service/stock.service';
 import { ToastrService } from 'ngx-toastr';
 import { Draftlog } from 'src/app/model/openstock/draftlog';
 import { reject } from 'q';
+import { environment } from 'src/environments/environment';
+import { StockComponent } from '../stock.component';
+declare function myTest(): any;
+  
+
 
 @Component({
   selector: 'app-loglist',
@@ -10,11 +15,20 @@ import { reject } from 'q';
   styleUrls: ['./loglist.component.css']
 })
 export class LoglistComponent implements OnInit {
+  hideloglist = false;
 
   constructor(private service: StockService, private toastr:ToastrService) { }
 
   ngOnInit() {
     this.service.refreshLogList();
+
+    // this.service.refreshLogList().then((res) => {
+    //   console.log(res);
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
+    // myTest();
+
   }
 
   populateForm(stock : Draftlog){
@@ -42,7 +56,7 @@ export class LoglistComponent implements OnInit {
     
   }
   viewDetails(){
-    
+    myTest();
   }
 
   

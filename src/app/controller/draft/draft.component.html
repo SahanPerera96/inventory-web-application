@@ -1,0 +1,150 @@
+<div class="col-md-12">
+
+    <h1 class="display-4 text-center">Open stock Draft </h1>
+    <!-- <button type="button" class="btn btn-info" (click)="refreshpage()">Refresh</button> -->
+    <hr>
+    <div class="row" name="logComponent" [hidden]="hidelog" >
+      
+      <div class="col-md-5">
+             <div>
+               <!-- [hidden]="hidelog" -->
+             <h3>Create Stock Log</h3>
+             <br>
+             
+             <form #form="ngForm" autocomplete="off"  (submit)="onSubmit(form)">
+             
+               <div class="form-group">
+                 <label>Reason</label>
+                 <input name="reason" #reason= "ngModel" [(ngModel)]="service.formData.reason" class="form-control" required>
+                 <div class="validation-error" *ngIf="reason.invalid && reason.touched">This field is required</div>
+               </div>
+               <div class="form-group" hidden >
+                 <label>User name</label>
+                 <input name="id" #id= "ngModel" [(ngModel)]="service.formData.id" class="form-control">
+                 <!-- <div class="validation-error" *ngIf="userid.invalid && userid.touched">This field is required</div> -->
+               </div>
+               <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="reset"  class="btn btn-lg btn-block btn-info">Clear</button>
+                    </div>
+                  </div>
+                  
+                </div>
+             </form>
+             </div>
+          
+      </div>
+      <div class="col-md-1"></div>
+
+      <div class="col-md-6">
+          <table class="table table-hover table-bordered" >
+              <!-- [hidden]="hideloglist" -->
+              <thead class="thead-dark thead-center">
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">User</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+          
+            <tr *ngFor = "let stock of service.list">
+                
+              <td (click) = "populateForm(stock)">{{stock.date}}</td>
+              <td (click) = "populateForm(stock)">{{stock.reason}}</td>
+              <td (click) = "populateForm(stock)">{{stock.userId}}</td>
+              <td><button class="btn btn-sm btn-outline-success"(click) = "viewDetails(stock)">Details</button></td>
+              <td><button class="btn btn-sm btn-outline-danger" (click) = "onDelete(stock.id)"> X </button></td>
+            </tr>
+          </table>
+
+          
+      </div>
+  
+    </div>
+    
+    <div class="row" name="detailsComponent" [hidden]="hidelogDetails">
+      <div class="col-md-5">
+          <button (click) = "backToLog()"  >Back</button>
+          <br>
+          <h3>Add Stock Log Details</h3>
+          <br>
+          <label>Date : {{logDetailsModel.date}}</label><br>
+          <label>Reason : {{logDetailsModel.reason}} </label><br>
+          <label>User : {{logDetailsModel.userId}} </label>
+          <hr>
+          <form  #formtwo="ngForm" autocomplete="off"  (submit)="onSubmitDetails(formtwo)">
+          
+            <div class="form-group">
+              <label>Item</label>
+              <input name="itemId" #itemId= "ngModel" [(ngModel)]="service.draftFormData.itemId" class="form-control" required>
+              <div class="validation-error" *ngIf="itemId.invalid && itemId.touched" >This field is required</div>
+            </div>
+            <div class="form-group">
+              <label>UOM</label>
+              <input name="uomId" #uomId= "ngModel" [(ngModel)]="service.draftFormData.uomId" class="form-control" required>
+              <div class="validation-error" *ngIf="uomId.invalid && uomId.touched" >This field is required</div>
+            </div>
+            <div class="form-group">
+              <label>Brand</label>
+              <input name="brandId"  #brandId= "ngModel" [(ngModel)]="service.draftFormData.brandId" class="form-control" required>
+              <div class="validation-error" *ngIf="brandId.invalid && brandId.touched" >This field is required</div>
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input name="quantity" #quantity= "ngModel" [(ngModel)]="service.draftFormData.quantity" class="form-control" required>
+              <div class="validation-error" *ngIf="quantity.invalid && quantity.touched">This field is required</div>
+            </div>
+            <div class="form-group" hidden >
+              <label>Id</label>
+              <input name="id"  #id= "ngModel" [(ngModel)]="service.draftFormData.id" class="form-control">
+              <!-- <div class="validation-error" *ngIf="userid.invalid && userid.touched">This field is required</div> -->
+            </div>
+            
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                    <button type="submit"  [disabled]="formtwo.invalid" class="btn btn-block btn-info">SUBMIT</button>
+                </div>
+                <div class="col-sm-6">
+                    <button type="reset"  class="btn btn-block btn-info">Clear</button>
+                </div>
+              </div>
+              
+            </div>
+          </form>
+      </div>
+      <div class="col-md-1"></div>
+
+      <div class="col-md-6">
+
+          <table class="table table-hover table-bordered">
+   
+              <thead class="thead-dark thead-center">
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">UOM</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+            
+            <tr *ngFor = "let stockdetails of service.detailList">
+                
+              <td (click) = "populateDetails(stockdetails)">{{stockdetails.itemId}}</td>
+              <td (click) = "populateDetails(stockdetails)">{{stockdetails.brandId}}</td>
+              <td (click) = "populateDetails(stockdetails)">{{stockdetails.uomId}}</td>
+              <td (click) = "populateDetails(stockdetails)">{{stockdetails.quantity}}</td>
+              <td><button class="btn btn-sm btn-outline-danger" (click) = "onDeleteDetails(stockdetails.id)"> X </button></td>
+            </tr>
+            </table>
+      </div>
+  
+    </div>
+  </div>

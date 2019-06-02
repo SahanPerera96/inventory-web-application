@@ -15,6 +15,18 @@ import {HttpClientModule} from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
 import { ToastrModule } from 'ngx-toastr';
+import { HomeComponent } from './controller/home/home.component';
+import { StockmainComponent } from './controller/stockmain/stockmain.component';
+import { DraftComponent } from './controller/draft/draft.component';
+import { DraftapproveComponent } from './controller/draftapprove/draftapprove.component';
+import { OpenstockComponent } from './controller/openstock/openstock.component';
+import { ReportmainComponent } from './controller/report/reportmain/reportmain.component';
+import { StockmovementComponent } from './controller/report/stockmovement/stockmovement.component';
+import { StockasatComponent } from './controller/report/stockasat/stockasat.component';
+import { OndemandComponent } from './controller/report/ondemand/ondemand.component';
+import { CriticalstockComponent } from './controller/report/criticalstock/criticalstock.component';
+import { ConsumerinvoiceComponent } from './controller/report/consumerinvoice/consumerinvoice.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +35,18 @@ import { ToastrModule } from 'ngx-toastr';
     LogComponent,
     LoglistComponent,
     DetailsComponent,
-    DetailslistComponent
+    DetailslistComponent,
+    HomeComponent,
+    StockmainComponent,
+    DraftComponent,
+    DraftapproveComponent,
+    OpenstockComponent,
+    ReportmainComponent,
+    StockmovementComponent,
+    StockasatComponent,
+    OndemandComponent,
+    CriticalstockComponent,
+    ConsumerinvoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
 
   <h1 class="display-4 text-center">Open stock </h1>
   <hr>
-  <div class="row" name="logComponent"  >
+  <div class="row" name="logComponent"  [hidden]="hidelog">
     <div class="col-md-5">
       <app-log></app-log>
     </div>
@@ -11,7 +11,7 @@
     </div>
 
   </div>
-  <div class="row" name="detailsComponent" >
+  <div class="row" name="detailsComponent" [hidden]="hidelogDetails">
     <div class="col-md-5">
       <app-details></app-details>
     </div>

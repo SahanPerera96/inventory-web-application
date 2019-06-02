@@ -1,0 +1,49 @@
+<div class="col-md-12">
+
+  <h1 class="display-4 text-center">Open stock Details </h1>
+  
+  <button type="button" class="btn btn-info" (click)="refreshpage()">Refresh</button>
+  <hr>
+  
+  <div class="col-md-12" *ngFor="let master of service.masterList">
+    <br>
+    <label>Date : {{master.date}}</label><br>
+    <label>Reason : {{master.reason}} </label><br>
+    <label>User : {{master.userId}} </label>
+  
+    
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+  
+        <table class="table table-hover table-bordered">
+  
+          <thead class="thead-dark thead-center">
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Brand</th>
+              <th scope="col">UOM</th>
+              <th scope="col">Quantity</th>
+  
+            </tr>
+          </thead>
+  
+          <tr *ngFor="let stockdetails of master.stockDetails">
+  
+            <td >{{stockdetails.itemId}}</td>
+            <td >{{stockdetails.brandId}}</td>
+            <td >{{stockdetails.uomId}}</td>
+            <td >{{stockdetails.quantity}}</td>
+  
+          </tr>
+        </table>
+
+        
+      </div>
+      
+    </div>
+    <hr>
+  </div>
+  
+
+</div>

@@ -1,0 +1,64 @@
+<div class="col-md-12">
+
+  <h1 class="display-4 text-center">Stock Movement Report</h1>
+
+  <!-- <button type="button" class="btn btn-info" (click)="refreshpage()">Refresh</button> -->
+  <hr>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+
+        <form #formSMR="ngForm" autocomplete="off" (submit)="onSubmitParameters(formSMR)">
+          <div class="row">
+            <div class="form-group col-md-2">
+              <label>Date</label>
+              <input name="datevalue" #datevalue="ngModel" [(ngModel)]="service.parameterValues.datevalue" class="form-control"
+                required>
+              <div class="validation-error" *ngIf="datevalue.invalid && datevalue.touched">This field is required</div>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label>Item</label>
+              <input name="itemId" #itemId="ngModel" [(ngModel)]="service.parameterValues.itemId" class="form-control"
+                required>
+              <div class="validation-error" *ngIf="itemId.invalid && itemId.touched">This field is required</div>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label>Brand</label>
+              <input name="brandId" #brandId="ngModel" [(ngModel)]="service.parameterValues.brandId" class="form-control"
+                required>
+              <div class="validation-error" *ngIf="brandId.invalid && brandId.touched">This field is required</div>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label>UOM</label>
+              <input name="uomId" #uomId="ngModel" [(ngModel)]="service.parameterValues.uomId" class="form-control"
+                required>
+              <div class="validation-error" *ngIf="uomId.invalid && uomId.touched">This field is required</div>
+            </div>
+            <div class="form-group col-md-2">
+              <label></label>
+              <button type="submit" [disabled]="formSMR.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+
+            </div>
+            <div class="form-group col-md-2">
+              <label></label>
+              <button type="reset" class="btn btn-lg btn-block btn-info">CLEAR</button>
+
+            </div>
+
+          </div>
+
+
+        </form>
+      </div>
+
+
+    </div>
+    <hr>
+  </div>
+
+
+</div>

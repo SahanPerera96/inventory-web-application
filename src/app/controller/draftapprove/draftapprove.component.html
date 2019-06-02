@@ -1,0 +1,60 @@
+<div class="col-md-12">
+
+  <h1 class="display-4 text-center">Open stock Draft Approval </h1>
+  
+  <button type="button" class="btn btn-info" (click)="refreshpage()">Refresh</button>
+  <hr>
+  <div class="row">
+    
+    <div class="col-md-8">
+      <div class="row" name="draftview" style="align-content: center; ">
+        <!-- class="selectpicker "data-width="400px" data-live-search="true" -->
+        <select  [(ngModel)] ="datelist" (ngModelChange)= "onSelectLog(datelist)" >
+          <option value="0">Please select Date</option>
+          <option  *ngFor="let stock of logListApproved"  [value]="stock.id" >{{stock.date}} </option>
+          
+        </select>
+       
+      </div>
+    </div>
+    <div class="col-md-1">
+      <button type="button" (click)="onApproval()" class="btn btn-success">Approve</button>
+    </div>
+  </div>
+
+
+  <br>
+  <label>Date : {{logDetailsModel.date}}</label><br>
+  <label>Reason : {{logDetailsModel.reason}} </label><br>
+  <label>User : {{logDetailsModel.userId}} </label>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+      <table class="table table-hover table-bordered">
+
+        <thead class="thead-dark thead-center">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Brand</th>
+            <th scope="col">UOM</th>
+            <th scope="col">Quantity</th>
+
+          </tr>
+        </thead>
+
+        <tr *ngFor="let stockdetails of service.approvalDetailList">
+
+          <td (click)="populateDetails(stockdetails)">{{stockdetails.itemId}}</td>
+          <td (click)="populateDetails(stockdetails)">{{stockdetails.brandId}}</td>
+          <td (click)="populateDetails(stockdetails)">{{stockdetails.uomId}}</td>
+          <td (click)="populateDetails(stockdetails)">{{stockdetails.quantity}}</td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
