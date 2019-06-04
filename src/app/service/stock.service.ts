@@ -41,9 +41,15 @@ approvaDraftFormData : Draftdetails;
         reject(err);
     }
     )*/
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'bearer 015ba1bc-a1ae-46a6-a800-66ce7dc59d60'
+      })
+    };
 
     return new Promise((resolve , reject) => {
-      this.http.get(this.Default_URL+'/stock/openstock/draft',
+      this.http.get(this.Default_URL+'/stock/openstock/draft',httpOptions
       // {
         //  headers: new HttpHeaders().set('Authorization', 'bearer 4dca4c42-fc2d-4c11-9bbc-411f20ebeb22')
      // }
