@@ -9,33 +9,31 @@
     <div class="row">
       <div class="col-md-12">
 
-        <form #formSMR="ngForm" autocomplete="off" (submit)="onSubmitParameters(formSMR)">
+        <form #formSMR="ngForm" autocomplete="off" (submit)="getReport(formSMR)">
           <div class="row">
-            <div class="form-group col-md-2">
+            <!-- <div class="form-group col-md-2">
               <label>Date</label>
-              <input name="datevalue" #datevalue="ngModel" [(ngModel)]="service.parameterValues.datevalue" class="form-control"
+              <input name="datevalue" #datevalue="ngModel" [(ngModel)]="parameterValues.datevalue" class="form-control"
                 required>
               <div class="validation-error" *ngIf="datevalue.invalid && datevalue.touched">This field is required</div>
-            </div>
+            </div> -->
 
             <div class="form-group col-md-2">
               <label>Item</label>
-              <input name="itemId" #itemId="ngModel" [(ngModel)]="service.parameterValues.itemId" class="form-control"
-                required>
+              <input name="itemId" #itemId="ngModel" [(ngModel)]="parameterValues.itemId" class="form-control" required>
               <div class="validation-error" *ngIf="itemId.invalid && itemId.touched">This field is required</div>
             </div>
 
             <div class="form-group col-md-2">
               <label>Brand</label>
-              <input name="brandId" #brandId="ngModel" [(ngModel)]="service.parameterValues.brandId" class="form-control"
+              <input name="brandId" #brandId="ngModel" [(ngModel)]="parameterValues.brandId" class="form-control"
                 required>
               <div class="validation-error" *ngIf="brandId.invalid && brandId.touched">This field is required</div>
             </div>
 
             <div class="form-group col-md-2">
               <label>UOM</label>
-              <input name="uomId" #uomId="ngModel" [(ngModel)]="service.parameterValues.uomId" class="form-control"
-                required>
+              <input name="uomId" #uomId="ngModel" [(ngModel)]="parameterValues.uomId" class="form-control" required>
               <div class="validation-error" *ngIf="uomId.invalid && uomId.touched">This field is required</div>
             </div>
             <div class="form-group col-md-2">
@@ -58,6 +56,34 @@
 
     </div>
     <hr>
+
+    <div class="row">
+      <div class="col-md-2" style="float: center;">
+        <h4>Item Name</h4>
+        <h6>brand | Umo</h6>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" style="float: center;">
+        <h5>Open Stock</h5>
+      </div>
+      <div class="row">
+        <label style="padding-left: 100px"> {{reportResults.openStockDate}}</label>
+        <label style="padding-left: 200px"> {{reportResults.openStockQuantity}}</label>
+      </div>
+
+    </div>
+ <div class="row">
+      <div class="col-md-12" style="float: center;">
+        <h5>Issued Made</h5>
+      </div>
+      <div class="row" #ngFor = "let issues of service.reportValues">
+        <label style="padding-left: 100px"> {{issues.dateTime}}</label>
+        <label style="padding-left: 200px"> {{issues.quantity}}</label>
+      </div>
+      
+    </div>
   </div>
 
 

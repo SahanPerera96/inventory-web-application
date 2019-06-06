@@ -25,7 +25,7 @@ approvaDraftFormData : Draftdetails;
   masterListDetails : Draftdetails[];
 
   constructor(private http:HttpClient) { }
-  readonly Default_URL ='http://localhost:8080';
+  readonly Default_URL ='http://localhost:9090';
   postDraftStockLog(formData : Draftlog){
     return this.http.post(this.Default_URL +'/stock/openstock/draft/entry',formData)
   }
